@@ -2,23 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TestComponent } from '../test/test.component';
-import { Test2Component} from '../test2/test2.component';
-import {BatmanModule} from '../batman/batman.module';
+import {MainComponent} from '../main/main.component';
 
 const appRoutes: Routes = [
   {
-    path: 'test',
-    component: TestComponent
+    path: 'main',
+    component: MainComponent
   },
-  {
-    path: 'test2',
-    component: Test2Component
-  },
-  {
-    path: 'batman',
-    loadChildren: 'app/batman/batman.module#BatmanModule'
-  }
+  { path: '', redirectTo: '/main', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -36,4 +27,4 @@ const appRoutes: Routes = [
   ],
   declarations: []
 })
-export class RouteModule { }
+export class AppRoutingModule { }

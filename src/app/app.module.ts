@@ -1,36 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { RouteModule} from './route/route.module';
+import {AppRoutingModule} from './app-routing/app-routing.module';
 
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
-import { Test2Component } from './test2/test2.component';
-import { TestRoutesModule } from './test-routes/test-routes.module';
-
-
-const appRoutes: Routes = [
-  { path: 'main/:id',      component: TestComponent },
-  { path: '',
-    redirectTo: '/main/0',
-    pathMatch: 'full'
-  }
-];
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
-    Test2Component
+    MainComponent
   ],
   imports: [
-    RouteModule,
-    HttpClientModule,
-    TestRoutesModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' })
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
