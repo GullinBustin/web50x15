@@ -3,13 +3,18 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import {MainComponent} from '../main/main.component';
+import {StartComponent} from '../start/start.component';
 
 const appRoutes: Routes = [
   {
     path: 'main',
     component: MainComponent
   },
-  { path: '', redirectTo: '/main', pathMatch: 'full' }
+  {
+    path: 'start',
+    component: StartComponent
+  },
+  { path: '', redirectTo: '/start', pathMatch: 'full' }
 ];
 
 @NgModule({
