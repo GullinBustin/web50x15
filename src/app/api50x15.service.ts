@@ -9,21 +9,36 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class Api50x15Service {
 
-  private pregutnaUrl = 'http://localhost:3000/player/pregunta';
-  private startUrl = 'http://localhost:3000/player/start';
+  private baseUrl = 'http://localhost:3000/game/';
+  private pregutnaUrl = 'pregunta';
+  private startUrl = 'start';
+  private nextLvlUrl = 'nextLVL';
+
+  private players = [];
+  private players_50ps = [];
+  private players_change = [];
+  private players_change_50pc = [];
 
   private options = {withCredentials: true};
 
+  private currentQuestion: IPregunta;
+
   constructor(private http: HttpClient) { }
 
-  getQuestion(): Observable<IPregunta> {
-    return this.http.get<IPregunta>(this.pregutnaUrl, this.options)
+  getQuestion(name): Observable<IPregunta> {
+    return this.http.get<IPregunta>(this.baseUrl + this.pregutnaUrl + '/' + name, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 
-  postStart(names) {
+  postNextLvl() {
+    return this.http.post(this.baseUrl + this.nextLvlUrl, {}, this.options)
+      .do(data => console.log('All: ' + JSON.stringify(data)))
+      ;
+  }
 
-    return this.http.post(this.startUrl, {'pNames': names}, this.options)
+  postStart(names) {
+    this.players = names;
+    return this.http.post(this.baseUrl + this.startUrl, {'pNames': names}, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 

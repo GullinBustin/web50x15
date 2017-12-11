@@ -16,10 +16,13 @@ export class StartComponent implements OnInit {
   }
 
   onClickMe() {
-    this.service_api50x15.postStart(['yo'])
+    this.service_api50x15.postStart(['Yo'])
       .subscribe(data => {
          console.log(data);
-         this.router.navigateByUrl('/main');
+         this.service_api50x15.postNextLvl()
+           .subscribe( (value: Response) => {
+             this.router.navigateByUrl('/main');
+           });
 
       });
   }

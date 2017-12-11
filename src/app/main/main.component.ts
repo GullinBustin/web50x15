@@ -15,8 +15,11 @@ export class MainComponent implements OnInit {
   constructor(private service_api50x15: Api50x15Service) { }
 
   ngOnInit() {
-    this.service_api50x15.getQuestion()
-      .subscribe(question => {this.question = question; });
+
+    this.service_api50x15.getQuestion('Yo')
+      .subscribe(question => {this.question = question;
+        console.log(this.question);
+      });
   }
 
 }
