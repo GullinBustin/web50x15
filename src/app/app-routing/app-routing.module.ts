@@ -7,7 +7,7 @@ import {StartComponent} from '../start/start.component';
 
 const appRoutes: Routes = [
   {
-    path: 'main',
+    path: 'main/:name',
     component: MainComponent
   },
   {
