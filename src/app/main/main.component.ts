@@ -31,25 +31,29 @@ export class MainComponent implements OnInit {
 
 
   handleAnswer(answer) {
-    this.service_api50x15.postAnswer(this.player_name, answer)
-      .subscribe(value => {
-        const nextPlayer = this.service_api50x15.getNextPlayer();
-        console.log(nextPlayer);
-        if (nextPlayer === undefined) {
-          console.log('SIIIIIIIIII');
-          this.service_api50x15.postNextLvl()
-            .subscribe( (value2: Response) => {
-              if (value2['reason'] === 'OK') {
-                console.log(this.service_api50x15.getCurrentPlayer());
-                this.router.navigateByUrl('/main/' + this.service_api50x15.getNextPlayer());
-                // window.location.reload();
-              }
-            });
-        }else {
-          console.log('NOOOOOOOOOO');
-          this.router.navigateByUrl('/main/' + nextPlayer);
-        }
-      });
+    this.service_api50x15.postAnswer(this.player_name, answer);
+    const nextPlayer = this.service_api50x15.getNextPlayer();
+    console.log(nextPlayer);
+    if (nextPlayer === undefined) {
+      this.service_api50x15.postNextLvl()
+        .subscribe( (value: Response) => {
+          console.log(value);
+          if (value['reason'] === 'OK') {
+            if (value['game_ends'] === false) {
+              console.log(this.service_api50x15.getCurrentPlayer());
+              this.router.navigateByUrl('/main/' + this.service_api50x15.getNextPlayer());
+              // window.location.reload();
+            } else {
+              console.log('Game Over');
+              // this.router.navigateByUrl('/start');
+            }
+          } else {
+            console.log('Turn not ends');
+          }
+        });
+    }else {
+      this.router.navigateByUrl('/main/' + nextPlayer);
+    }
   }
   // private ngOnDestroy() {
   //   this.sub.unsubscribe();
