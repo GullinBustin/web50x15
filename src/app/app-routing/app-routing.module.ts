@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {MainComponent} from '../main/main.component';
 import {StartComponent} from '../start/start.component';
+import {EndTurnComponent} from '../end-turn/end-turn.component';
 
 const appRoutes: Routes = [
   {
@@ -14,6 +15,10 @@ const appRoutes: Routes = [
     path: 'start',
     component: StartComponent
   },
+  {
+    path: 'end_turn',
+    component: EndTurnComponent
+  },
   { path: '', redirectTo: '/start', pathMatch: 'full' }
 ];
 
@@ -22,7 +27,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {
-        enableTracing: true, // <-- debugging purposes only
+        enableTracing: false, // <-- debugging purposes only
       }
     ),
     CommonModule

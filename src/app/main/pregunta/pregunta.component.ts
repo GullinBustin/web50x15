@@ -1,4 +1,3 @@
-///<reference path="../../../../node_modules/@angular/core/src/metadata/directives.d.ts"/>
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IPregunta} from '../../interfaces/pregunta';
 

@@ -12,7 +12,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class MainComponent implements OnInit {
 
   question: IPregunta;
+  comodines;
   player_name: string;
+  hidePopup = true;
+  google_search: string;
 
   constructor(private service_api50x15: Api50x15Service,
               private route: ActivatedRoute,
@@ -25,36 +28,53 @@ export class MainComponent implements OnInit {
         .subscribe(question => {this.question = question;
           console.log(this.question);
         });
+      this.service_api50x15.getComodines(this.player_name)
+        .subscribe(res => {
+          this.comodines = res['comodines'];
+        });
     });
 
   }
 
-
-  handleAnswer(answer) {
-    this.service_api50x15.postAnswer(this.player_name, answer);
+  next_turn() {
     const nextPlayer = this.service_api50x15.getNextPlayer();
     console.log(nextPlayer);
     if (nextPlayer === undefined) {
-      this.service_api50x15.postNextLvl()
-        .subscribe( (value: Response) => {
-          console.log(value);
-          if (value['reason'] === 'OK') {
-            if (value['game_ends'] === false) {
-              console.log(this.service_api50x15.getCurrentPlayer());
-              this.router.navigateByUrl('/main/' + this.service_api50x15.getNextPlayer());
-              // window.location.reload();
-            } else {
-              console.log('Game Over');
-              // this.router.navigateByUrl('/start');
-            }
-          } else {
-            console.log('Turn not ends');
-          }
-        });
+      this.router.navigateByUrl('end_turn', { skipLocationChange: true });
     }else {
-      this.router.navigateByUrl('/main/' + nextPlayer);
+      this.router.navigateByUrl('/main/' + nextPlayer, { skipLocationChange: true });
     }
   }
+
+  handleAnswer(answer) {
+    this.service_api50x15.postAnswer(this.player_name, answer);
+    this.next_turn();
+  }
+
+  handleComodin(comodin) {
+
+    console.log(comodin);
+    // this.service_api50x15.postComodin(this.player_name, comodin, this.comodin_google);
+    if (comodin === 'google') {
+      // this.next_turn();
+      this.hidePopup = false;
+      console.log('hidePopup', this.hidePopup);
+    }
+  }
+
+  comodin_google(query) {
+    console.log(query);
+    this.service_api50x15.postComodinGoogle(this.player_name, query)
+      .subscribe(value => {
+        console.log(value);
+        this.google_search = value['google_search']['data'][0]['description'];
+      });
+  }
+
+  hide_google_popup() {
+    this.hidePopup = true;
+  }
+
   // private ngOnDestroy() {
   //   this.sub.unsubscribe();
   // }

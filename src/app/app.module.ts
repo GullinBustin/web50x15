@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { PreguntaComponent } from './main/pregunta/pregunta.component';
 import { StartComponent } from './start/start.component';
+import { EndTurnComponent } from './end-turn/end-turn.component';
+import { ComodinesComponent } from './main/comodines/comodines.component';
+import { PopupGoogleComponent } from './main/popup-google/popup-google.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { StartComponent } from './start/start.component';
     AppComponent,
     MainComponent,
     PreguntaComponent,
-    StartComponent
+    StartComponent,
+    EndTurnComponent,
+    ComodinesComponent,
+    PopupGoogleComponent
   ],
   imports: [
     BrowserModule,

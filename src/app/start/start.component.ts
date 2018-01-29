@@ -23,7 +23,8 @@ export class StartComponent implements OnInit {
          console.log(data);
          this.service_api50x15.postNextLvl()
            .subscribe( (value: Response) => {
-             this.router.navigateByUrl('/main/' + this.service_api50x15.getNextPlayer());
+             const next_player = this.service_api50x15.getNextPlayer();
+             this.router.navigateByUrl('/main/' + next_player, { skipLocationChange: true });
            });
 
       });

@@ -1,4 +1,8 @@
-<h1>{{player_name}}</h1>
+<div class="row">
+  <h1 class="col-md-4">{{ player_name }}</h1>
+  <app-comodines class="col-md-offset-1 col-md-6" [comodines]='comodines' (comodinSelect)="handleComodin($event)"></app-comodines>
+</div>
 <div class="row" style="height: 25%">
   <app-pregunta [pregunta]='question' (answerSelect)="handleAnswer($event)" ></app-pregunta>
 </div>
+<app-popup-google [hidden]="hidePopup" [google_search]='google_search' (close)="hide_google_popup($event)" (send)="comodin_google($event)" ></app-popup-google>
