@@ -17,20 +17,10 @@ export class Api50x15Service {
   private answerUrl = 'answer';
   private comodinesUrl = 'comodines';
   private comodinUrl = 'comodin';
-
-
-
-  private alive_players = [];
-  private dead_players = [];
-  private current_players = [];
-  private players_50pc = [];
-  private players_change = [];
-  private players_change_50pc = [];
-  private current_type = 1;
+  private playersLifeUrl = 'players_life';
+  private playersPointsUrl = 'players_points';
 
   private options = {withCredentials: true};
-
-  private currentQuestion: IPregunta;
 
   constructor(private http: HttpClient) { }
 
@@ -41,15 +31,11 @@ export class Api50x15Service {
   }
 
   postNextLvl() {
-    console.log('Jugadores Vivos:');
-    console.log(this.alive_players.slice());
-    this.current_players = this.alive_players.slice();
     return this.http.post(this.baseUrl + this.nextLvlUrl, {}, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 
   postStart(names) {
-    this.alive_players = names.slice();
     return this.http.post(this.baseUrl + this.startUrl, {'pNames': names}, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
@@ -59,57 +45,17 @@ export class Api50x15Service {
       pName: name,
       answer: key
     };
-    this.http.post(this.baseUrl + this.answerUrl, body, this.options)
-      .do(data => console.log('All: ' + JSON.stringify(data)))
-      .subscribe(value => {
-        if (value['successful']) {
-          console.log('Congrat');
-        }else {
-          const index = this.alive_players.indexOf(name);
-          console.log(index);
-          if (index > -1) {
-            this.alive_players.splice(index, 1);
-          }
-          console.log(this.alive_players);
-          this.dead_players.push(name);
-          console.log('sorry');
-        }
-      });
+    return this.http.post(this.baseUrl + this.answerUrl, body, this.options)
+      .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 
-  getNextPlayer() {
-    console.log(this.current_players);
-    return this.current_players.pop();
-  }
-
-  getCurrentPlayer() {
-    return this.current_players;
-  }
-
-  postComodin(name, comodin, callback) {
+  postComodin(name, comodin) {
     const body = {
       pName: name,
       answer: comodin
     };
     return this.http.post(this.baseUrl + this.comodinUrl, body, this.options)
-      .do(data => console.log('All: ' + JSON.stringify(data)))
-      .subscribe(value => {
-        switch (comodin) {
-          case '50pc':
-            if (this.current_type === 1){
-              this.players_50pc.push(name);
-            }else {
-              this.players_change_50pc.push(name);
-            }
-            break;
-          case 'change':
-            this.players_change.push(name);
-            break;
-          case 'google':
-            callback(value['google_search']);
-            break;
-        }
-      });
+      .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 
   postComodinGoogle(name, query) {
@@ -124,6 +70,16 @@ export class Api50x15Service {
 
   getComodines(name) {
     return this.http.get(this.baseUrl + this.comodinesUrl + '/' + name, this.options)
+      .do(data => console.log('All: ' + JSON.stringify(data)));
+  }
+
+  getPlayersLife() {
+    return this.http.get(this.baseUrl + this.playersLifeUrl, this.options)
+      .do(data => console.log('All: ' + JSON.stringify(data)));
+  }
+
+  getPlayersPoints() {
+    return this.http.get(this.baseUrl + this.playersPointsUrl, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 }

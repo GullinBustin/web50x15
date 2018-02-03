@@ -12,6 +12,7 @@ import { StartComponent } from './start/start.component';
 import { EndTurnComponent } from './end-turn/end-turn.component';
 import { ComodinesComponent } from './main/comodines/comodines.component';
 import { PopupGoogleComponent } from './main/popup-google/popup-google.component';
+import { PlayerMenuComponent } from './start/player-menu/player-menu.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PopupGoogleComponent } from './main/popup-google/popup-google.component
     StartComponent,
     EndTurnComponent,
     ComodinesComponent,
-    PopupGoogleComponent
+    PopupGoogleComponent,
+    PlayerMenuComponent
   ],
   imports: [
     BrowserModule,

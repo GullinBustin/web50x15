@@ -1,1 +1,8 @@
-<button (click)="onClickMe()">Click me!</button>
+<div class="row">
+  <div class="col-md-4">
+    <app-player-menu (changePlayers)="handlePlayers($event)"></app-player-menu>
+  </div>
+</div>
+<div class="row">
+  <button (click)="onClickMe()">Click me!</button>
+</div>

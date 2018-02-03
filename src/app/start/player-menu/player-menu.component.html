@@ -1,0 +1,26 @@
+<div class="row">
+  <table class="table table-striped table-sm">
+    <tr *ngFor="let player of players" class="row">
+      <p class="col-md-8">{{player}}</p>
+      <button (click)="removePlayer(player)"
+              type="button" class="close col-md-3"
+              aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </tr>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <input (keyup.enter)="addUser(newUser)"
+           type="text"
+           class="form-control" #newUser>
+  </div>
+  <div class="col-md-4">
+    <button (click)="addUser(newUser)"
+            type="button"
+            class="col-md-10 col-md-offset-1 btn">
+      Send
+    </button>
+  </div>
+</div>

@@ -18,6 +18,8 @@ export class PreguntaComponent implements OnInit {
   }
 
   clickAnswer(key) {
+    console.log(this.pregunta);
+    console.log(key);
     this.answerSelect.emit(key);
   }
 }

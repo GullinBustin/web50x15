@@ -5,7 +5,7 @@
   <button class="col-md-5 col-md-offset-1" (click)="clickAnswer(pregunta.respuestas[0].key)" >{{ pregunta.respuestas[0].text }}</button>
   <button class="col-md-5" (click)="clickAnswer(pregunta.respuestas[1].key)" >{{ pregunta.respuestas[1].text }}</button>
 </div>
-<div class="row">
+<div *ngIf="pregunta.respuestas.length > 2" class="row">
   <button class="col-md-offset-1 col-md-5" (click)="clickAnswer(pregunta.respuestas[2].key)" >{{ pregunta.respuestas[2].text }}</button>
   <button class="col-md-5" (click)="clickAnswer(pregunta.respuestas[3].key)" >{{ pregunta.respuestas[3].text }}</button>
 </div>
