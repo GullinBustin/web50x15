@@ -92,4 +92,8 @@ export class MainComponent implements OnInit {
   //   this.sub.unsubscribe();
   // }
 
+  plantarse() {
+    this.service_api50x15.plantarPlayer(this.player_name)
+      .subscribe(value => this.next_turn());
+  }
 }

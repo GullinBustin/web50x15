@@ -19,6 +19,7 @@ export class Api50x15Service {
   private comodinUrl = 'comodin';
   private playersLifeUrl = 'players_life';
   private playersPointsUrl = 'players_points';
+  private plantarseUrl = 'plantarse';
 
   private options = {withCredentials: true};
 
@@ -80,6 +81,14 @@ export class Api50x15Service {
 
   getPlayersPoints() {
     return this.http.get(this.baseUrl + this.playersPointsUrl, this.options)
+      .do(data => console.log('All: ' + JSON.stringify(data)));
+  }
+
+  plantarPlayer(name) {
+    const body = {
+      pName: name
+    };
+    return this.http.post(this.baseUrl + this.plantarseUrl, body, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 }
