@@ -14,6 +14,7 @@ export class Data50x15Service {
   private players_points = [];
 
   private currentQuestion: IPregunta;
+  private all_players = [];
 
   constructor() { }
 
@@ -37,8 +38,8 @@ export class Data50x15Service {
     return -1;
   }
 
-  getCurrentPlayer() {
-    return this.current_players;
+  getAllPlayer() {
+    return this.all_players;
   }
 
   useComodin(name, comodin) {
@@ -70,6 +71,10 @@ export class Data50x15Service {
     this.dead_players = new_dead_players;
   }
 
+  isGameOver(){
+    return this.alive_players.length === 0;
+  }
+
   nextTurn() {
     this.current_players = this.alive_players.slice();
     this.current_players.reverse();
@@ -80,8 +85,9 @@ export class Data50x15Service {
   }
 
   startGame(ply_array) {
-    this.alive_players = ply_array;
-    this.current_players = ply_array;
+    this.all_players = ply_array.slice();
+    this.alive_players = ply_array.slice();
+    this.current_players = ply_array.slice();
     this.current_players.reverse();
   }
 }

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {MainComponent} from '../main/main.component';
 import {StartComponent} from '../start/start.component';
 import {EndTurnComponent} from '../end-turn/end-turn.component';
+import {GameOverComponent} from '../game-over/game-over.component';
 
 const appRoutes: Routes = [
   {
@@ -12,14 +13,18 @@ const appRoutes: Routes = [
     component: MainComponent
   },
   {
-    path: 'start',
+    path: '',
     component: StartComponent
   },
   {
     path: 'end_turn',
     component: EndTurnComponent
   },
-  { path: '', redirectTo: '/start', pathMatch: 'full' }
+  {
+    path: 'end_game',
+    component: GameOverComponent
+  },
+  { path: 'start', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({

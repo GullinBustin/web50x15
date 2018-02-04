@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Api50x15Service} from '../services/api50x15.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Data50x15Service} from '../services/data50x15.service';
 
 @Component({
-  selector: 'app-end-turn',
-  templateUrl: './end-turn.component.html',
-  styleUrls: ['./end-turn.component.css']
+  selector: 'app-game-over',
+  templateUrl: './game-over.component.html',
+  styleUrls: ['./game-over.component.css']
 })
-export class EndTurnComponent implements OnInit {
+export class GameOverComponent implements OnInit {
 
   players_points = [];
 
@@ -17,7 +17,6 @@ export class EndTurnComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-
     this.service_api50x15.getPlayersPoints()
       .subscribe(value => {
         let new_player_points = [];
@@ -31,23 +30,25 @@ export class EndTurnComponent implements OnInit {
       });
   }
 
-  onClickMe() {
-    this.service_api50x15.postNextLvl()
-      .subscribe( (value: Response) => {
-        this.service_data50x15.nextTurn();
-        if (value['reason'] === 'OK') {
-          if (value['game_ends'] === false) {
-            const next_player = this.service_data50x15.getNextPlayer();
-            this.router.navigateByUrl('/main/' + next_player, { skipLocationChange: true });
-            // window.location.reload();
-          } else {
-            console.log('Game Over');
-            // this.router.navigateByUrl('/start');
-          }
-        } else {
-          console.log('Turn not ends');
-        }
-      });
+  homeButton() {
+    this.router.navigateByUrl('/start', { skipLocationChange: true });
+
   }
 
+  restartButton() {
+    const all_players = this.service_data50x15.getAllPlayer();
+      this.service_api50x15.postStart(all_players)
+      .subscribe(data => {
+        console.log(data);
+        this.service_api50x15.postNextLvl()
+          .subscribe( (value: Response) => {
+            console.log(all_players);
+            this.service_data50x15.startGame(all_players);
+            const next_player = this.service_data50x15.getNextPlayer();
+            console.log(next_player);
+            this.router.navigateByUrl('/main/' + next_player, { skipLocationChange: true });
+          });
+
+      });
+  }
 }

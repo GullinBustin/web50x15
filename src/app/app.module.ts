@@ -13,6 +13,7 @@ import { EndTurnComponent } from './end-turn/end-turn.component';
 import { ComodinesComponent } from './main/comodines/comodines.component';
 import { PopupGoogleComponent } from './main/popup-google/popup-google.component';
 import { PlayerMenuComponent } from './start/player-menu/player-menu.component';
+import { GameOverComponent } from './game-over/game-over.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PlayerMenuComponent } from './start/player-menu/player-menu.component';
     EndTurnComponent,
     ComodinesComponent,
     PopupGoogleComponent,
-    PlayerMenuComponent
+    PlayerMenuComponent,
+    GameOverComponent
   ],
   imports: [
     BrowserModule,

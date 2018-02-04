@@ -45,7 +45,16 @@ export class MainComponent implements OnInit {
     this.google_search = null;
     const nextPlayer = this.service_data50x15.getNextPlayer();
     if (nextPlayer === -1) {
-      this.router.navigateByUrl('end_turn', { skipLocationChange: true });
+      this.service_api50x15.getPlayersLife()
+        .subscribe( value => {
+          this.service_data50x15.setPlayersLife(value['players_life']);
+          const gameover = this.service_data50x15.isGameOver();
+          if (gameover) {
+            this.router.navigateByUrl('end_game', {skipLocationChange: true});
+          }else {
+            this.router.navigateByUrl('end_turn', {skipLocationChange: true});
+          }
+        });
     }else {
       if (nextPlayer === this.player_name) {
         this.initialize_windows(nextPlayer);
@@ -88,12 +97,13 @@ export class MainComponent implements OnInit {
     this.hidePopup = true;
   }
 
-  // private ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  // }
-
   plantarse() {
     this.service_api50x15.plantarPlayer(this.player_name)
       .subscribe(value => this.next_turn());
   }
+
+  // private ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
+
 }
