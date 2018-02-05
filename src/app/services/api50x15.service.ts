@@ -10,7 +10,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Api50x15Service {
 
-  private baseUrl = 'http://localhost:3000/game/';
+  // private baseUrl = 'http://localhost:3000/game/';
+  private baseUrl = '/game/';
   private pregutnaUrl = 'pregunta';
   private startUrl = 'start';
   private nextLvlUrl = 'nextLVL';
