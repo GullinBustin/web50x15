@@ -6,12 +6,12 @@
       <p class="h2">Google Search</p>
     </div>
     <div class="row">
-      <div *ngIf="!google_search">
-        <div class="col-md-8 col-md-offset-1">
+      <div class="col-12" *ngIf="!google_search">
+        <div class="col-8">
           <input type="text" class="form-control input-lg" #googleQuery>
         </div>
-        <div class="col-md-3">
-          <button (click)="send_query(googleQuery.value)" type="button" class="col-md-8 col-md-offset-1 btn btn-success btn-lg">Send</button>
+        <div class="col-2">
+          <button (click)="send_query(googleQuery.value)" type="button" class="col-md-8 offset-md-1 btn btn-success btn-lg">Send</button>
         </div>
       </div>
       <div *ngIf="google_search">
@@ -25,7 +25,7 @@
     </div>
     <div class="row row-10"></div>
     <div class="row">
-      <button (click)="hide_popup()" type="button"class="col-md-1 col-md-offset-10 btn btn-secondary">Close</button>
+      <button (click)="hide_popup()" type="button"class="col-md-1 offset-md-10 btn btn-secondary">Close</button>
     </div>
   </div>
 

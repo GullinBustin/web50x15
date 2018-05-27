@@ -1,11 +1,11 @@
 <div class="row">
-<p  class="col-md-10 col-md-offset-1 " >{{ pregunta.enunciado }}</p>
+<p  class="col-md-10 offset-md-1 " >{{ pregunta.enunciado }}</p>
 </div>
 <div class="row">
-  <button class="col-md-5 col-md-offset-1" (click)="clickAnswer(pregunta.respuestas[0].key)" >{{ pregunta.respuestas[0].text }}</button>
-  <button class="col-md-5" (click)="clickAnswer(pregunta.respuestas[1].key)" >{{ pregunta.respuestas[1].text }}</button>
+  <button type="button" class="col-md-5 offset-md-1 btn btn-outline-primary" (click)="clickAnswer(pregunta.respuestas[0].key)" >{{ pregunta.respuestas[0].text }}</button>
+  <button type="button" class="col-md-5 btn btn-outline-primary" (click)="clickAnswer(pregunta.respuestas[1].key)" >{{ pregunta.respuestas[1].text }}</button>
 </div>
 <div *ngIf="pregunta.respuestas.length > 2" class="row">
-  <button class="col-md-offset-1 col-md-5" (click)="clickAnswer(pregunta.respuestas[2].key)" >{{ pregunta.respuestas[2].text }}</button>
-  <button class="col-md-5" (click)="clickAnswer(pregunta.respuestas[3].key)" >{{ pregunta.respuestas[3].text }}</button>
+  <button type="button" class="offset-md-1 col-md-5 btn btn-outline-primary" (click)="clickAnswer(pregunta.respuestas[2].key)" >{{ pregunta.respuestas[2].text }}</button>
+  <button type="button" class="col-md-5 btn btn-outline-primary" (click)="clickAnswer(pregunta.respuestas[3].key)" >{{ pregunta.respuestas[3].text }}</button>
 </div>

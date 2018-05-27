@@ -19,20 +19,24 @@ export class StartComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClickMe() {
-    this.service_api50x15.postStart(this.players)
-      .subscribe(data => {
-         console.log(data);
-         this.service_api50x15.postNextLvl()
-           .subscribe( (value: Response) => {
-             console.log(this.players);
-             this.service_data50x15.startGame(this.players);
-             const next_player = this.service_data50x15.getNextPlayer();
-             console.log(next_player);
-             this.router.navigateByUrl('/main/' + next_player, { skipLocationChange: true });
-           });
+  startGame() {
+    if (this.players.length === 0) {
+      alert('Jugadores Insuficientes');
+    }else {
+      this.service_api50x15.postStart(this.players)
+        .subscribe(data => {
+          console.log(data);
+          this.service_api50x15.postNextLvl()
+            .subscribe((value: Response) => {
+              console.log(this.players);
+              this.service_data50x15.startGame(this.players);
+              const next_player = this.service_data50x15.getNextPlayer();
+              console.log(next_player);
+              this.router.navigateByUrl('/main/' + next_player, {skipLocationChange: true});
+            });
 
-      });
+        });
+    }
   }
 
 
