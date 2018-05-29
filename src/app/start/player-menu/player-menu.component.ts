@@ -21,9 +21,12 @@ export class PlayerMenuComponent implements OnInit {
   }
 
   addUser(input) {
-    console.log(input.value);
-    this.players.push(input.value);
-    input.value = '';
-    this.changePlayers.emit(this.players);
+    input.value = input.value.trim();
+    if (input.value !== '' && this.players.indexOf(input.value) === -1) {
+      console.log(input.value);
+      this.players.push(input.value);
+      input.value = '';
+      this.changePlayers.emit(this.players);
+    }
   }
 }

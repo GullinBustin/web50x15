@@ -11,6 +11,8 @@ COPY ./tslint.json .
 COPY ./tsconfig.json .
 COPY ./.angular-cli.json .
 
+COPY ./scripts/start.sh .
+
 # RUN mkdir ~/.npm-global
 # RUN npm config set prefix '~/.npm-global'
 # RUN export PATH=~/.npm-global/bin:$PATH
@@ -23,4 +25,5 @@ RUN npm install
 
 RUN npm install -g @angular/cli
 
-CMD [ "ng", "build", "--output-path=50x15/dist" ,"--base-href=/50x15/"]
+
+CMD [ "./start.sh"]
