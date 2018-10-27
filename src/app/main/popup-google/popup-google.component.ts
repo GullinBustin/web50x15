@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-popup-google',
   templateUrl: './popup-google.component.html',
-  styleUrls: ['./popup-google.component.css']
+  styleUrls: ['./popup-google.component.sass']
 })
 export class PopupGoogleComponent implements OnInit {
 
