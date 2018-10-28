@@ -1,6 +1,8 @@
 <div class="row">
   <h1 class="col-md-4">Turno de {{ player_name }}</h1>
-  <app-comodines class="offset-md-1 col-md-6" [comodines]='comodines' (comodinSelect)="handleComodin($event)"></app-comodines>
+</div>
+<div class="row">
+  <app-comodines class="offset-md-1 col-md-10" [comodines]='comodines' (comodinSelect)="handleComodin($event)"></app-comodines>
 </div>
 <div class="row">
   <app-pregunta class="col-md-12" [pregunta]='question' (answerSelect)="handleAnswer($event)" ></app-pregunta>
