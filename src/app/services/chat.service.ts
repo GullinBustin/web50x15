@@ -11,6 +11,8 @@ export class ChatService {
 
   messages: Subject<any>;
 
+  private options = {withCredentials: true};
+
   // Our constructor calls our wsService connect method
   constructor(private wsService: WebsocketService, private http: HttpClient) {
     this.messages = <Subject<any>>wsService
@@ -28,6 +30,14 @@ export class ChatService {
 
   getRooms() {
     return this.http.get('/chat/get_rooms')
+      .do(data => console.log('All: ' + JSON.stringify(data)));
+  }
+
+  createRoom(roomName) {
+    const body = {
+      room_name: roomName
+    };
+    return this.http.post('/chat/create_room', body, this.options)
       .do(data => console.log('All: ' + JSON.stringify(data)));
   }
 

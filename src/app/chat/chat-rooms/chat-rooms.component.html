@@ -1,5 +1,8 @@
 <div class="row">
-  <h3>Username</h3>
+  <h4 class="col-12">Username</h4>
+  <div [hidden]="!joinFail">
+    <p style="color: red" >It's necessary a username</p>
+  </div>
   <input type="text"
          class="form-control" #newUser>
 </div>
@@ -23,6 +26,7 @@
 </div>
 <div class="row">
   <h3>Create Room</h3>
-  <input type="text"
+  <input (keyup.enter)="createRoom(newRoom, newUser)"
+         type="text"
          class="form-control" #newRoom>
 </div>

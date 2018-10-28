@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ChatRoomsComponent implements OnInit {
 
   rooms = [];
+  joinFail = false;
 
   constructor(private chat: ChatService,
               private route: ActivatedRoute,
@@ -18,12 +19,34 @@ export class ChatRoomsComponent implements OnInit {
   ngOnInit() {
     this.chat.getRooms().subscribe( value => {
      this.rooms = value['rooms'];
+     console.log(this.rooms[0])
     });
   }
 
   joinRoom(room, newUser) {
     const user = newUser.value.trim();
-    console.log(room + ' ' + user );
-    this.router.navigate([{ outlets: { chat: ['chat'] } }]);
+    console.log(room + ' ' + user);
+    if (user !== '') {
+      this.joinFail = false;
+      this.router.navigate([{outlets: {chat: ['chat']}}], {skipLocationChange: true});
+    }else{
+      this.joinFail = true;
+    }
+  }
+
+  createRoom(newRoom, newUser) {
+    const user = newUser.value.trim();
+    console.log(newRoom + ' ' + user);
+    if (user !== '') {
+      this.joinFail = false;
+      this.chat.createRoom(newRoom.value).subscribe( value => {
+        const response = value;
+        console.log(response)
+        this.router.navigate([{outlets: {chat: ['chat']}}], {skipLocationChange: true});
+
+      });
+    }else{
+      this.joinFail = true;
+    }
   }
 }
