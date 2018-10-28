@@ -14,6 +14,8 @@ import { ComodinesComponent } from './main/comodines/comodines.component';
 import { PopupGoogleComponent } from './main/popup-google/popup-google.component';
 import { PlayerMenuComponent } from './start/player-menu/player-menu.component';
 import { GameOverComponent } from './game-over/game-over.component';
+import { ChatComponent } from './chat/chat/chat.component';
+import { ChatRoomsComponent } from './chat/chat-rooms/chat-rooms.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { GameOverComponent } from './game-over/game-over.component';
     ComodinesComponent,
     PopupGoogleComponent,
     PlayerMenuComponent,
-    GameOverComponent
+    GameOverComponent,
+    ChatComponent,
+    ChatRoomsComponent
   ],
   imports: [
     BrowserModule,

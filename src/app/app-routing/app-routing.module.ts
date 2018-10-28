@@ -6,6 +6,8 @@ import {MainComponent} from '../main/main.component';
 import {StartComponent} from '../start/start.component';
 import {EndTurnComponent} from '../end-turn/end-turn.component';
 import {GameOverComponent} from '../game-over/game-over.component';
+import {ChatComponent} from '../chat/chat/chat.component';
+import {ChatRoomsComponent} from '../chat/chat-rooms/chat-rooms.component';
 
 const appRoutes: Routes = [
   {
@@ -23,6 +25,16 @@ const appRoutes: Routes = [
   {
     path: 'end_game',
     component: GameOverComponent
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
+    outlet: 'chat'
+  },
+  {
+    path: '',
+    component: ChatRoomsComponent,
+    outlet: 'chat'
   },
   { path: 'start', redirectTo: '/', pathMatch: 'full' }
 ];
