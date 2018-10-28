@@ -9,18 +9,19 @@ import { ChatService } from '../../services/chat.service';
 
 export class ChatComponent implements OnInit {
 
+  messages = [];
+
   constructor(private chat: ChatService) { }
 
   ngOnInit() {
-    this.chat.getRooms().subscribe( (value: Response) => {
-      console.log(value);
-    });
-    this.chat.messages.subscribe(msg => {
-      console.log(msg);
+    this.chat.getMessageEvent().subscribe((message) => {
+      this.messages.push(message)
+      console.log('user: ' + message['user'] + ' message: ' + message['message']);
     });
   }
 
-  sendMessage() {
-    this.chat.sendMsg('Test Message');
+  sendMessage(text) {
+    this.chat.sendMsg('message', {msg: text.value});
+    text.value = '';
   }
 }

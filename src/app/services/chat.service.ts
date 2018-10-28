@@ -3,29 +3,42 @@ import { WebsocketService } from './websocket.service';
 import { Subject } from 'rxjs/Subject';
 import { HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {IPregunta} from '../interfaces/pregunta';
 
 
 @Injectable()
 export class ChatService {
 
   messages: Subject<any>;
-
+  testEvent;
+  messageEvent;
   private options = {withCredentials: true};
 
   // Our constructor calls our wsService connect method
   constructor(private wsService: WebsocketService, private http: HttpClient) {
-    this.messages = <Subject<any>>wsService
-      .connect()
-      .map((response: any): any => {
-        return response;
-      });
+    this.wsService.initSocket();
+    this.testEvent = this.wsService.onEvent('test')
+      .do(data => console.log('Do: ' + JSON.stringify(data)));
+    this.messageEvent = this.wsService.onMessage()
+      .do(data => console.log('Do: ' + JSON.stringify(data)));
+  }
+
+
+  getTestEvent() {
+    return this.testEvent;
+  }
+
+  getMessageEvent() {
+    return this.messageEvent;
   }
 
   // Our simplified interface for sending
   // messages back to our socket.io server
-  sendMsg(msg) {
-    this.messages.next(msg);
+  sendMsg(event, msg) {
+    this.wsService.send(event, msg);
+  }
+
+  joinRoom(username, roomUuid) {
+    this.wsService.send('enter_room', {name: username, room_uuid: roomUuid});
   }
 
   getRooms() {

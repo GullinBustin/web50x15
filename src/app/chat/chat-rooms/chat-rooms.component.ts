@@ -19,7 +19,6 @@ export class ChatRoomsComponent implements OnInit {
   ngOnInit() {
     this.chat.getRooms().subscribe( value => {
      this.rooms = value['rooms'];
-     console.log(this.rooms[0])
     });
   }
 
@@ -28,6 +27,7 @@ export class ChatRoomsComponent implements OnInit {
     console.log(room + ' ' + user);
     if (user !== '') {
       this.joinFail = false;
+      this.chat.joinRoom(user, room['uuid'])
       this.router.navigate([{outlets: {chat: ['chat']}}], {skipLocationChange: true});
     }else{
       this.joinFail = true;
@@ -41,7 +41,8 @@ export class ChatRoomsComponent implements OnInit {
       this.joinFail = false;
       this.chat.createRoom(newRoom.value).subscribe( value => {
         const response = value;
-        console.log(response)
+        console.log(response);
+        this.chat.joinRoom(user, response['room_uuid'])
         this.router.navigate([{outlets: {chat: ['chat']}}], {skipLocationChange: true});
 
       });
