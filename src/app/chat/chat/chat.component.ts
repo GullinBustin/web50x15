@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewChecked} from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 
 @Component({
@@ -7,17 +7,23 @@ import { ChatService } from '../../services/chat.service';
   styleUrls: ['./chat.component.sass']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
 
   messages = [];
+
+  @ViewChild('chatScroll') private chatScroll;
 
   constructor(private chat: ChatService) { }
 
   ngOnInit() {
     this.chat.getMessageEvent().subscribe((message) => {
-      this.messages.push(message)
+      this.messages.push(message);
       console.log('user: ' + message['user'] + ' message: ' + message['message']);
     });
+  }
+
+  ngAfterViewChecked() {
+    this.chatScroll.nativeElement.scrollTop = this.chatScroll.nativeElement.scrollHeight;
   }
 
   sendMessage(text) {

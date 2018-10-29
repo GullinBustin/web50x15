@@ -1,4 +1,8 @@
-<p *ngFor="let message of messages" >
-  {{message.user}}: {{message.message}}
-</p>
-<input (keyup.enter)="sendMessage(text)" #text>
+<div #chatScroll class="row-70" style="overflow:auto;">
+  <p #pNgFor *ngFor="let message of messages" >
+    {{message.user}}: {{message.message}}
+  </p>
+</div>
+<label>send
+  <input (keyup.enter)="sendMessage(text)" #text>
+</label>
